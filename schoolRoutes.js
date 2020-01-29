@@ -16,32 +16,84 @@ router.get("/groups", (req, res) => {
 })
 
 router.get("/teachers", (req, res) => {
-    res.send("teachers")
+    res.send("All teachers: ")
+    Teacher.find().then(data => {
+        res.json(data)
+    })
+})
+
+router.post('/teachers', (req,res) => {
+    const teacher = new Teacher({
+        name: req.body.name,
+        age: req.body.age,
+        work_exp: req.body.work_exp
+    })
+    
+    Teacher.findOne({
+        name: teacher.name,
+        age: teacher.age,
+        work_exp: teacher.work_exp
+    }, (err, result) => {
+        if(err) throw err;
+        if(!result) {
+            teacher.save()
+                .then(data => {
+                    res.send("Welcome to our school, !")
+            })
+        }
+        else {
+            res.send("This teacher has already exist")
+        }
+    })
+    
+    
 })
 
 router.get('/students', (req, res) => {
-    res.send('All students: ')
+    Student.find().then(students => {
+        res.json(students)
+    })
 })
 
 router.post("/", (req, res) => {
-    
+    //...
 } )
 
 router.post('/students', (req, res) => {
     const student = new Student({
-        name: req.body.name,
-        age: req.body.age,
-        group: req.body.group
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            age: req.body.age,
+            rating: req.body.rating,
+            group: req.body.group
     })
-    
-    student.save()
-        .then( data => {
-        res.json(data)
-    })
-        .catch(err => {
-        res.json({message: err})
+
+    Student.findOne({
+        first_name: student.first_name,
+        last_name: student.last_name,
+        age: student.age,
+        group: student.group,
+        rating: student.rating
+    }, (err, result) => {
+        if(err) throw err;
+        if(!result){
+            student.save()
+                .then(data => {
+                    res.send(data.first_name + 'welcome to our school!')
+                })
+        }
+        else {
+            res.send("This student has already exist")
+        }
     })
 })
 
+
+router.delete("/students", (req, res) => {
+    Student.findByIdAndDelete(req.body.id, (err, data) => {
+        if(err) throw err
+        res.send(`${data.first_name} ${data.last_name} (${data.age}, ${data.group}) left the school`)
+    })
+})
 
 module.exports = router
