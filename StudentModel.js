@@ -1,9 +1,14 @@
 let mongoose = require('mongoose')
 
+
 let Student = new mongoose.Schema({
-    name: {
+    first_name: {
         type: String,
-        required: true,
+        required: true
+    },
+    last_name: {
+        type: String,
+        required: true
     },
     age: {
         type: Number,
@@ -12,6 +17,12 @@ let Student = new mongoose.Schema({
     group: {
         type: String,
         required: true
+    },
+    rating: {
+        type: Number,
+        required: true,
+        min: 0,
+        max: 100
     }
 })
  

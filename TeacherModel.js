@@ -7,7 +7,15 @@ let Teacher = new mongoose.Schema({
     },
     age: {
         type: Number,
-        required: true
+        required: true,
+        min: 25,
+        max: 80
+    },
+    work_exp: {
+        type: Number,
+        required: true,
+        min: 2,
+        max: 20
     }
 })
 
