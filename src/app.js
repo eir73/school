@@ -4,13 +4,15 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 const bodyParser = require('body-parser');
+/*const dbData = {
+    url: "mongodb+srv://daniil_kholodkov:rammstein1994201447@cluster0-3eao9.mongodb.net/test?retryWrites=true&w=majority"
+}*/
 const dbData = require('./config/db');
 const app = express();
 
 const schoolRoute = require("./routes/schoolRoutes");
 const userRoute = require('./middleware/ware_routes');
 
-const stud = require('./db/models/StudentModel.js').schema;
 const port = 8000;
 const db = mongoose.connect(dbData.url, { useNewUrlParser: true }, () => {
     console.log("Connected to DB!");
