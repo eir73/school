@@ -16,8 +16,6 @@ const userRoute = require('./middleware/ware_routes');
 const port = 8000;
 const db = mongoose.connect(dbData.url, { useNewUrlParser: true }, () => {
     console.log("Connected to DB!");
-    
-    
 });
 
 app.use(bodyParser.urlencoded({ extended: true })) 
