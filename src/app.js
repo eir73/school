@@ -4,9 +4,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
 const bodyParser = require('body-parser');
-/*const dbData = {
-    url: "mongodb+srv://daniil_kholodkov:rammstein1994201447@cluster0-3eao9.mongodb.net/test?retryWrites=true&w=majority"
-}*/
+
 const dbData = require('./config/db');
 const app = express();
 
